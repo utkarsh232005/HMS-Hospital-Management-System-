@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: hospital-backend
+    env: docker
+    rootDir: backend
+    plan: free
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        value: jdbc:mysql://bdyt5hgettcyvinqrbqy-mysql.services.clever-cloud.com:3306/bdyt5hgettcyvinqrbqy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - key: SPRING_DATASOURCE_USERNAME
+        value: u1phnsqw9zpuhvzx
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: 8UehEYBkdENnqu9aVzHQ
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
