@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MediCore Hospital Management</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-mark">+</div>
+            <div>
+                <strong>MediCore</strong>
+                <span>Hospital System</span>
+            </div>
+        </div>
+
+        <nav class="nav" aria-label="Primary">
+            <span class="nav-section">Main</span>
+            <button class="nav-item active" data-page="dashboard" type="button">Dashboard</button>
+            <button class="nav-item" data-page="patients" type="button">Patients</button>
+            <button class="nav-item" data-page="appointments" type="button">Appointments</button>
+            <button class="nav-item" data-page="doctors" type="button">Doctors</button>
+            <span class="nav-section">Hospital</span>
+            <button class="nav-item" data-page="departments" type="button">Departments</button>
+            <button class="nav-item" data-page="pharmacy" type="button">Pharmacy</button>
+            <span class="nav-section">Admin</span>
+            <button class="nav-item" data-page="reports" type="button">Reports</button>
+        </nav>
+
+        <div class="profile">
+            <span class="avatar">DR</span>
+            <div>
+                <strong>Dr. Rajan</strong>
+                <span>Administrator</span>
+            </div>
+        </div>
+    </aside>
+
+    <main class="shell">
+        <div class="mobile-bar">
+            <strong>MediCore</strong>
+            <select id="mobileNav" aria-label="Page navigation">
+                <option value="dashboard">Dashboard</option>
+                <option value="patients">Patients</option>
+                <option value="appointments">Appointments</option>
+                <option value="doctors">Doctors</option>
+                <option value="departments">Departments</option>
+                <option value="pharmacy">Pharmacy</option>
+                <option value="reports">Reports</option>
+            </select>
+        </div>
+        <section id="app" class="page" aria-live="polite"></section>
+    </main>
+
+    <dialog id="recordDialog" class="dialog">
+        <form id="recordForm" method="dialog">
+            <div class="dialog-head">
+                <h2 id="dialogTitle"></h2>
+                <button class="icon-button" id="closeDialog" type="button" aria-label="Close">x</button>
+            </div>
+            <div id="formFields" class="form-grid"></div>
+            <div class="dialog-actions">
+                <button class="secondary" id="cancelDialog" type="button">Cancel</button>
+                <button class="primary" type="submit">Save</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+</body>
+</html>
