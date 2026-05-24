@@ -1,5 +1,5 @@
 const params = new URLSearchParams(window.location.search);
-const API_BASE = params.get("api") || window.localStorage.getItem("medicoreApiBase") || "http://localhost:8080";
+const API_BASE = params.get("api") || window.localStorage.getItem("medicoreApiBase") || "https://hospital-backend-xt5x.onrender.com";
 const api = {
     patients: `${API_BASE}/api/patients`,
     doctors: `${API_BASE}/api/doctors`,
