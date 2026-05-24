@@ -19,6 +19,7 @@ HMS-Hospital-Management-System-/
 ├── GCP_DEPLOYMENT.md   # Deployment instructions for Google Cloud Run
 ├── GCP_VM_DEPLOYMENT.md  # Always-free VM deployment guide
 ├── VERCEL_RENDER_DEPLOYMENT.md  # Free Vercel & Render deployment guide
+├── CLI_DEPLOYMENT.md  # CLI-only deployment instructions (Vercel, Render)
 └── hospital_db.session.sql
 ```
 
@@ -56,6 +57,7 @@ Then visit `http://localhost:3000` in your web browser.
 ## Deployment Options
 
 We provide the following deployment guides:
-1. **Vercel & Render (100% Free & Easiest)**: Refer to [VERCEL_RENDER_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/VERCEL_RENDER_DEPLOYMENT.md) to deploy the frontend on Vercel and the backend on Render.
-2. **GCP Serverless (Cloud Run & Cloud SQL)**: Refer to [GCP_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/GCP_DEPLOYMENT.md) for deploying auto-scaling containerized services.
-3. **GCP Free Tier VM (Compute Engine)**: Refer to [GCP_VM_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/GCP_VM_DEPLOYMENT.md) for hosting the entire stack on GCP's always-free VM tier.
+1. **CLI-Only Deployment (Vercel & Render)**: Refer to [CLI_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/CLI_DEPLOYMENT.md) to deploy all resources completely via terminal CLIs.
+2. **Vercel & Render Dashboard**: Refer to [VERCEL_RENDER_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/VERCEL_RENDER_DEPLOYMENT.md) to deploy using Vercel & Render web dashboards.
+3. **GCP Serverless (Cloud Run & Cloud SQL)**: Refer to [GCP_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/GCP_DEPLOYMENT.md) for deploying auto-scaling containerized services.
+4. **GCP Free Tier VM (Compute Engine)**: Refer to [GCP_VM_DEPLOYMENT.md](file:///Users/utkarshpatrikar/Code%20Files/HMS-Hospital-Management-System-/GCP_VM_DEPLOYMENT.md) for hosting the entire stack on GCP's always-free VM tier.
