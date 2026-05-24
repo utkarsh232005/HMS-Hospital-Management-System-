@@ -6,10 +6,10 @@ services:
     plan: free
     envVars:
       - key: SPRING_DATASOURCE_URL
-        value: jdbc:mysql://bdyt5hgettcyvinqrbqy-mysql.services.clever-cloud.com:3306/bdyt5hgettcyvinqrbqy?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+        sync: false
       - key: SPRING_DATASOURCE_USERNAME
-        value: u1phnsqw9zpuhvzx
+        sync: false
       - key: SPRING_DATASOURCE_PASSWORD
-        value: 8UehEYBkdENnqu9aVzHQ
+        sync: false
       - key: SPRING_JPA_HIBERNATE_DDL_AUTO
         value: update
