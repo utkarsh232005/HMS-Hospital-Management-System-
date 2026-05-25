@@ -1,6 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const DEFAULT_CORE = params.get("coreApi") || window.localStorage.getItem("medicoreCoreApiBase") || "https://hospital-core.onrender.com";
-const DEFAULT_APPT = params.get("apptApi") || window.localStorage.getItem("medicoreApptApiBase") || "https://hospital-appointment.onrender.com";
+const DEFAULT_APPT = params.get("apptApi") || window.localStorage.getItem("medicoreApptApiBase") || "https://hospital-appointment-s91s.onrender.com";
 const CORE_API_BASE = params.get("api") || DEFAULT_CORE;
 const APPT_API_BASE = params.get("api") || DEFAULT_APPT;
 
