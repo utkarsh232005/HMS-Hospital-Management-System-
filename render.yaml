@@ -32,5 +32,8 @@ services:
         value: update
       - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
         value: "2"
-      - key: EUREKA_SERVER_URL
-        value: http://hospital-core:8080/eureka/
+      - key: EUREKA_SERVER_HOSTPORT
+        fromService:
+          name: hospital-core
+          type: web
+          property: hostport
