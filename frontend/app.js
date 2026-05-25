@@ -1,9 +1,12 @@
 const params = new URLSearchParams(window.location.search);
-const API_BASE = params.get("api") || window.localStorage.getItem("medicoreApiBase") || "https://hospital-backend-xt5x.onrender.com";
+const DEFAULT_BASE = params.get("api") || window.localStorage.getItem("medicoreApiBase") || "http://localhost:8080";
+const CORE_API_BASE = params.get("coreApi") || window.localStorage.getItem("medicoreCoreApiBase") || DEFAULT_BASE;
+const APPT_API_BASE = params.get("apptApi") || window.localStorage.getItem("medicoreApptApiBase") || DEFAULT_BASE;
+
 const api = {
-    patients: `${API_BASE}/api/patients`,
-    doctors: `${API_BASE}/api/doctors`,
-    appointments: `${API_BASE}/api/appointments`
+    patients: `${CORE_API_BASE}/api/patients`,
+    doctors: `${CORE_API_BASE}/api/doctors`,
+    appointments: `${APPT_API_BASE}/api/appointments`
 };
 
 const state = {

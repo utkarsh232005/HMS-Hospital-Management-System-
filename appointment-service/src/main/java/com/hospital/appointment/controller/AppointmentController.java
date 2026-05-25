@@ -1,7 +1,7 @@
-package com.hospital.api.controller;
+package com.hospital.appointment.controller;
 
-import com.hospital.api.model.AppointmentEntity;
-import com.hospital.api.repository.AppointmentRepository;
+import com.hospital.appointment.model.AppointmentEntity;
+import com.hospital.appointment.repository.AppointmentRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

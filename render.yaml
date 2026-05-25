@@ -1,8 +1,8 @@
 services:
   - type: web
-    name: hospital-backend
+    name: hospital-core
     env: docker
-    rootDir: backend
+    rootDir: core-service
     plan: free
     envVars:
       - key: SPRING_DATASOURCE_URL
@@ -14,5 +14,23 @@ services:
       - key: SPRING_JPA_HIBERNATE_DDL_AUTO
         value: update
       - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
-        value: "3"
+        value: "2"
 
+  - type: web
+    name: hospital-appointment
+    env: docker
+    rootDir: appointment-service
+    plan: free
+    envVars:
+      - key: SPRING_DATASOURCE_URL
+        sync: false
+      - key: SPRING_DATASOURCE_USERNAME
+        sync: false
+      - key: SPRING_DATASOURCE_PASSWORD
+        sync: false
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update
+      - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
+        value: "2"
+      - key: EUREKA_SERVER_URL
+        value: http://hospital-core:8080/eureka/

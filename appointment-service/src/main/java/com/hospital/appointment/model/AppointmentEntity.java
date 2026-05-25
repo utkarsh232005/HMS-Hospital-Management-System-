@@ -1,4 +1,4 @@
-package com.hospital.api.model;
+package com.hospital.appointment.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

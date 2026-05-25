@@ -1,6 +1,6 @@
-package com.hospital.api.repository;
+package com.hospital.appointment.repository;
 
-import com.hospital.api.model.AppointmentEntity;
+import com.hospital.appointment.model.AppointmentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentEntity, Integer> {

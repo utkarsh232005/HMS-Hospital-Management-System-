@@ -1,9 +1,9 @@
 # Maven
-backend/target/
-backend/*.jar
-backend/*.war
-backend/*.zip
-backend/*.tar.gz
+**/target/
+**/*.jar
+**/*.war
+**/*.zip
+**/*.tar.gz
 
 # IDEs
 .idea/
