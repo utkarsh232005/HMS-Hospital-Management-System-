@@ -1,7 +1,8 @@
 const params = new URLSearchParams(window.location.search);
-const DEFAULT_BASE = params.get("api") || window.localStorage.getItem("medicoreApiBase") || "http://localhost:8080";
-const CORE_API_BASE = params.get("coreApi") || window.localStorage.getItem("medicoreCoreApiBase") || DEFAULT_BASE;
-const APPT_API_BASE = params.get("apptApi") || window.localStorage.getItem("medicoreApptApiBase") || DEFAULT_BASE;
+const DEFAULT_CORE = params.get("coreApi") || window.localStorage.getItem("medicoreCoreApiBase") || "https://hospital-core.onrender.com";
+const DEFAULT_APPT = params.get("apptApi") || window.localStorage.getItem("medicoreApptApiBase") || "https://hospital-appointment.onrender.com";
+const CORE_API_BASE = params.get("api") || DEFAULT_CORE;
+const APPT_API_BASE = params.get("api") || DEFAULT_APPT;
 
 const api = {
     patients: `${CORE_API_BASE}/api/patients`,
