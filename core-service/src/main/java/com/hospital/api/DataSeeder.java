@@ -4,6 +4,9 @@ import com.hospital.api.model.DoctorEntity;
 import com.hospital.api.model.PatientEntity;
 import com.hospital.api.repository.DoctorRepository;
 import com.hospital.api.repository.PatientRepository;
+import com.hospital.api.model.UserEntity;
+import com.hospital.api.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,8 +15,15 @@ import org.springframework.context.annotation.Configuration;
 public class DataSeeder {
 
     @Bean
-    CommandLineRunner seedDatabase(PatientRepository patients, DoctorRepository doctors) {
+    CommandLineRunner seedDatabase(PatientRepository patients, DoctorRepository doctors, UserRepository users, PasswordEncoder encoder) {
         return args -> {
+            if (users.count() == 0) {
+                UserEntity admin = new UserEntity();
+                admin.setUsername("admin");
+                admin.setPassword(encoder.encode("admin123"));
+                admin.setRole("ROLE_ADMIN");
+                users.save(admin);
+            }
             if (patients.count() == 0 && doctors.count() == 0) {
                 patients.save(patient(100, "Amara Kapoor", 34, "Cardiology", "Hypertension", "ADMITTED", "Dr. Iyer",
                         "2024-05-10"));

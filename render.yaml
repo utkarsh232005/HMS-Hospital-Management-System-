@@ -15,6 +15,10 @@ services:
         value: update
       - key: SPRING_DATASOURCE_HIKARI_MAXIMUM_POOL_SIZE
         value: "2"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: "86400000"
 
   - type: web
     name: hospital-appointment
