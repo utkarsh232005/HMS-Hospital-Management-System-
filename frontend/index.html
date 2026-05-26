@@ -30,26 +30,32 @@
         </nav>
 
         <div class="profile">
-            <span class="avatar">DR</span>
-            <div>
-                <strong>Dr. Rajan</strong>
-                <span>Administrator</span>
+            <span class="avatar" id="userAvatar">DR</span>
+            <div style="flex: 1;">
+                <strong id="userFullName">Dr. Rajan</strong>
+                <span id="userRole">Administrator</span>
             </div>
+            <button class="icon-button" id="logoutButton" type="button" aria-label="Logout" style="min-height: 32px; width: 32px; background: transparent; font-size: 16px; border: 0; cursor: pointer;">
+                🚪
+            </button>
         </div>
     </aside>
 
     <main class="shell">
         <div class="mobile-bar">
             <strong>MediCore</strong>
-            <select id="mobileNav" aria-label="Page navigation">
-                <option value="dashboard">Dashboard</option>
-                <option value="patients">Patients</option>
-                <option value="appointments">Appointments</option>
-                <option value="doctors">Doctors</option>
-                <option value="departments">Departments</option>
-                <option value="pharmacy">Pharmacy</option>
-                <option value="reports">Reports</option>
-            </select>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <select id="mobileNav" aria-label="Page navigation">
+                    <option value="dashboard">Dashboard</option>
+                    <option value="patients">Patients</option>
+                    <option value="appointments">Appointments</option>
+                    <option value="doctors">Doctors</option>
+                    <option value="departments">Departments</option>
+                    <option value="pharmacy">Pharmacy</option>
+                    <option value="reports">Reports</option>
+                </select>
+                <button class="small-button" id="mobileLogout" type="button" style="min-height: 32px; padding: 4px 8px;">Logout</button>
+            </div>
         </div>
         <section id="app" class="page" aria-live="polite"></section>
     </main>
@@ -67,6 +73,28 @@
             </div>
         </form>
     </dialog>
+
+    <div id="loginScreen" class="login-screen" style="display: none;">
+        <div class="login-card">
+            <div class="login-brand">
+                <div class="brand-mark">+</div>
+                <h2>MediCore HMS</h2>
+            </div>
+            <p class="login-subtitle">Access your hospital management dashboard</p>
+            <form id="loginForm">
+                <div class="field">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username (e.g. admin)" required autocomplete="username">
+                </div>
+                <div class="field" style="margin-top: 14px;">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password (e.g. admin123)" required autocomplete="current-password">
+                </div>
+                <div id="loginError" class="login-error" style="display: none;"></div>
+                <button type="submit" class="primary" style="width: 100%; margin-top: 20px; min-height: 42px;">Sign In</button>
+            </form>
+        </div>
+    </div>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
     <script src="./app.js" defer></script>

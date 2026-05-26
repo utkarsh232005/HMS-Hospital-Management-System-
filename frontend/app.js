@@ -61,7 +61,85 @@ document.querySelector("#closeDialog").addEventListener("click", () => dialog.cl
 document.querySelector("#cancelDialog").addEventListener("click", () => dialog.close());
 form.addEventListener("submit", saveRecord);
 
-loadData();
+// Auth and initialization check
+checkAuth();
+
+function checkAuth() {
+    const token = localStorage.getItem("medicore_token");
+    const loginScreen = document.querySelector("#loginScreen");
+    if (!token) {
+        if (loginScreen) loginScreen.style.display = "flex";
+    } else {
+        if (loginScreen) loginScreen.style.display = "none";
+        updateProfileUI();
+        loadData();
+    }
+}
+
+// Login Form Handler
+const loginForm = document.querySelector("#loginForm");
+if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const username = document.querySelector("#loginUsername").value;
+        const password = document.querySelector("#loginPassword").value;
+        const loginError = document.querySelector("#loginError");
+
+        loginError.style.display = "none";
+
+        try {
+            const response = await fetch(`${CORE_API_BASE}/api/auth/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (!response.ok) {
+                throw new Error("Invalid username or password");
+            }
+
+            const data = await response.json();
+            localStorage.setItem("medicore_token", data.token);
+            localStorage.setItem("medicore_username", data.username);
+            localStorage.setItem("medicore_role", data.role);
+
+            checkAuth();
+        } catch (error) {
+            loginError.textContent = error.message;
+            loginError.style.display = "block";
+        }
+    });
+}
+
+function logout() {
+    localStorage.removeItem("medicore_token");
+    localStorage.removeItem("medicore_username");
+    localStorage.removeItem("medicore_role");
+    checkAuth();
+}
+
+const logoutBtn = document.querySelector("#logoutButton");
+if (logoutBtn) logoutBtn.addEventListener("click", logout);
+
+const mobileLogoutBtn = document.querySelector("#mobileLogout");
+if (mobileLogoutBtn) mobileLogoutBtn.addEventListener("click", logout);
+
+function updateProfileUI() {
+    const username = localStorage.getItem("medicore_username") || "Guest";
+    const role = localStorage.getItem("medicore_role") || "Administrator";
+    
+    const formattedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+    const formattedRole = role.replace("ROLE_", "").toLowerCase().replace(/^\w/, c => c.toUpperCase());
+    const avatarText = username.slice(0, 2).toUpperCase();
+
+    const avatarEl = document.querySelector("#userAvatar");
+    const nameEl = document.querySelector("#userFullName");
+    const roleEl = document.querySelector("#userRole");
+
+    if (avatarEl) avatarEl.textContent = avatarText;
+    if (nameEl) nameEl.textContent = formattedUsername;
+    if (roleEl) roleEl.textContent = formattedRole;
+}
 
 async function loadData() {
     app.innerHTML = `<div class="empty">Loading hospital records...</div>`;
@@ -82,7 +160,16 @@ async function loadData() {
 }
 
 async function getJson(url) {
-    const response = await fetch(url);
+    const headers = {};
+    const token = localStorage.getItem("medicore_token");
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+    const response = await fetch(url, { headers });
+    if (response.status === 401 || response.status === 403) {
+        logout();
+        throw new Error("Session expired. Please log in again.");
+    }
     if (!response.ok) throw new Error(`${url} returned ${response.status}`);
     return response.json();
 }
@@ -363,11 +450,22 @@ async function saveRecord(event) {
     const { type, id } = activeForm;
     const url = id == null ? api[type] : `${api[type]}/${id}`;
     const method = id == null ? "POST" : "PUT";
+    
+    const headers = { "Content-Type": "application/json" };
+    const token = localStorage.getItem("medicore_token");
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
     const response = await fetch(url, {
         method,
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify(payload)
     });
+    if (response.status === 401 || response.status === 403) {
+        logout();
+        return;
+    }
     if (!response.ok) {
         showToast("Save failed");
         return;
@@ -385,7 +483,21 @@ async function deleteRecord(type, id) {
     const record = state[type].find((item) => Number(item.id) === Number(id));
     const label = record?.name || record?.patientName || `#${id}`;
     if (!confirm(`Remove ${label}?`)) return;
-    const response = await fetch(`${api[type]}/${id}`, { method: "DELETE" });
+
+    const headers = {};
+    const token = localStorage.getItem("medicore_token");
+    if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    const response = await fetch(`${api[type]}/${id}`, { 
+        method: "DELETE",
+        headers
+    });
+    if (response.status === 401 || response.status === 403) {
+        logout();
+        return;
+    }
     if (!response.ok) {
         showToast("Delete failed");
         return;
